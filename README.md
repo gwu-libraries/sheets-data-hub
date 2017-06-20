@@ -55,18 +55,19 @@ Once installed, the following functionality is present:
 
 4. Open the data hub spreadsheet and select **Tools** -> **Script editor...** -> **Create a new project.**
     * Give the project a name in the upper left corner of the screen. This name will be how you reference the code from the other sheets, so ideally it should be a legal Javascript variable name (no spaces, not a reserved word): _e.g._, **SerialsUpdate**.
-    * Copy the code from the file **data_hub_sync.js** and paste it into the code editor, overwriting the default dummy code.
+    * Copy the code from the file **data_hub_sync.js** and paste it into the code editor, overwriting the default dummy code. Save the script.
     * Get the **ID** for the data hub spreadsheet. The ID is the long alphanumeric string embedded in the URL of the spreadsheet (**not** the code editor). [See here for a complete description.](https://developers.google.com/sheets/api/guides/concepts#spreadsheet_id)
     * Copy this **ID** and paste it between the single quotes in the line of code that reads `this.foreignssKey = '';` This allows the local sheets to access the data hub.
     * Save the script. Then select **File** -> **Manage versions...** -> **Save new version** from the Script Editor menu. Now the script will be available to the local spreadsheets as a library.
     * Under **File** -> **Project properties**, copy the **Project key** (which you will need for the next step).
+    * Select **File** -> **New** -> **Html file**. Paste the contents of **sidebar_doc.html** into the script editor and save the script. (The HTML file contains brief documentation that is displayed in a sidebar upon loading each sheet.)
 
 5. Open each local sheet. Then open the Script Editor (**Tools** -> **Script editor...**) and give the local project a name.
     * Copy the code from the file **sync_call.js** and paste it into the Script Editor, overwriting the default dummy code.
     * Select **Resources** -> **Libraries** from the Script Editor menu. Enter the _project key_ (from step 4) into the space labeled **Add a library** and click **Add**. (If working with multiple versions of the code, make sure the correct version is selected from the menu above.)
-    * Each of the three functions bound to this sheet makes a call to the library you have just enabled. If necessary, change the calls to `SerialsUpdate.update` and `SerialsUpdate.showSidebar`    to reflect your library name.
+    * Each of the three functions bound to this sheet makes a call to the library you have just enabled. If necessary, change the calls to `SerialsUpdate.update` and `SerialsUpdate.showSidebar` to reflect your library name.
     * Save the script. 
-
+   
 6. Each user needs to have **Edit** permissions (through the Google Sheets sharing menu) for any local sheet they will use, _as well as_ for the data hub. (The latter is necessary for the `update` script to work properly.) Users should not make changes directly to the data hub, however.
 
 7. In order to enable scheduled backups, open the data hub spreadsheet, select **Tools** -> **Script editor.** From the script editor menu, select **Edit** -> **Curent project triggers**. Click the link to add a new trigger. Select the `backupSheet` function from the drop-down menu, and select the appropriate frequency, then click **Save**. The `backupSheet` function will create a copy of the data hub spreadsheet, appending the current date to the file name, and will save it to a folder called **backups** at the top-level of the Google drive of the owning account.

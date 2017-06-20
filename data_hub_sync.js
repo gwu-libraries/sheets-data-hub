@@ -211,20 +211,7 @@ function dataObj(keyMap, sheetKey, localss) {
     return objStore;  
   }  
 
-// iterate over the rows on each data table (sheet), updating local data with remotely owned values
-  // to be done on load
-function updateOnLoad () {
-  
-  update('foreign', 'local');
-  
-  }
-// iterate over the rows on each data table (sheet), updating remote data with locally owned values
-  // to be done on user command
-function updateOnCommand () { 
-  
-  update('local', 'foreign');
 
-} 
 
 function update (source, target) {
     // local table container
@@ -364,24 +351,6 @@ function appendNewValues (newData, sheet, targetCols) {
   
 
 }
-
-      
-// Add menu items for update functions and to open doc pane
-function onOpen(e) {
-  var menu = SpreadsheetApp.getUi().createMenu("Serials Data");//.createAddonMenu(); // Or DocumentApp or FormApp.
-      // Add a normal menu item (works in all authorization modes).
-  menu.addItem('Update Data Hub', 'updateOnCommand')
-       .addItem('Get Latest Data', 'updateOnLoad')
-       .addItem('Show Documentation', 'showSidebar')
-       .addToUi();
-  
-  updateOnLoad();
-  
-  showSidebar();
-
-} 
-
-
 
 function changeLog (spreadsheet) {
   // holds changes for display in a separate sheet, change_log
