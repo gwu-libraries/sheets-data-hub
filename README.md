@@ -61,13 +61,13 @@ Once installed, the following functionality is present:
   * Save the script. Then select **File** -> **Manage versions...** -> **Save new version** from the Script Editor menu. Now the script will be available to the local spreadsheets as a library.
   * Under **File** -> **Project properties**, copy the **Project key** (which you will need for the next step).
 
- 5. Open each local sheet. Then open the Script Editor (**Tools** -> **Script editor...**) and give the local project a name.
+5. Open each local sheet. Then open the Script Editor (**Tools** -> **Script editor...**) and give the local project a name.
   * Copy the code from the file **sync_call.js** and paste it into the Script Editor, overwriting the default dummy code.
   * Select **Resources** -> **Libraries** from the Script Editor menu. Enter the _project key_ (from step 4) into the space labeled **Add a library** and click **Add**. (If working with multiple versions of the code, make sure the correct version is selected from the menu above.)
   * Each of the three functions bound to this sheet makes a call to the library you have just enabled. If necessary, change the calls to `SerialsUpdate.update` and `SerialsUpdate.showSidebar`  to reflect your library name.
   * Save the script. 
 
-6. Each user needs to have **Edit** permissions (through the Google Sheets sharing menu) for any local sheet they will use, _as well as_ to the data hub. (The latter is necessary for the `update` script to work properly.) Users should not make changes directly to the data hub, however.
+6. Each user needs to have **Edit** permissions (through the Google Sheets sharing menu) for any local sheet they will use, _as well as_ for the data hub. (The latter is necessary for the `update` script to work properly.) Users should not make changes directly to the data hub, however.
 
-7. 
+7. In order to enable scheduled backups, open the data hub spreadsheet, select **Tools** -> **Script editor.** From the script editor menu, select **Edit** -> **Curent project triggers**. Click the link to add a new trigger. Select the `backupSheet` function from the drop-down menu, and select the appropriate frequency, then click **Save**. The `backupSheet` function will create a copy of the data hub spreadsheet, appending the current date to the file name, and will save it to a folder called **backups** at the top-level of the Google drive of the owning account.
 
