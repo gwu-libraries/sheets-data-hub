@@ -92,7 +92,7 @@ function dataObj(keyMap, sheetKey, localss) {
   */
   
   // unique identifier for the remote source (aka the data hub)
-  this.foreignssKey = '1r1AiWTgjH881fJ4Ymf-UUuNZGNEazr5-iR1cqDbgecs'; // unique spreadsheet key
+  this.foreignssKey = ''; // unique spreadsheet key
   
   // get a reference to the local table/tab/sheet
   this.localSheet = localss.getSheetByName(sheetKey);
