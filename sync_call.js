@@ -21,6 +21,6 @@ function onOpen(e) {
   
   updateOnLoad();
   
-  showSidebar();
+  SerialsUpdate.showSidebar();
 
 }  

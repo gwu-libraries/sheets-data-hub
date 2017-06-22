@@ -36,7 +36,7 @@ function loadParams(localss) {
       // e.g., {'script_test': {'remoteSheetName': 'individual_subs', 'primaryKey': 'po_number', 'localColumns': ['bib_id', 'amount']}}
       
       // first time seeing this sheetName?
-      if (!(row[0] in obj)) { 
+      if (!(row[0] in obj)  && (row[0] != '')) { 
         
         // create the inner obj
         obj[row[0]] = row.slice(1).reduce(function (innerObj, cell, i) { 
@@ -264,10 +264,14 @@ function update (source, target) {
                      var colKey = sourceCols[j]; 
                    
                      if (!colKey) { return cell; }  // if this isn't a column for updating, ignore it
-                      
+                     
+                     // Need to test explicitly for Date objects, because as objects they cannot be compared usefully, only as values 
+                     targetVal = (cell instanceof Date) ? cell.valueOf() : cell;
+                     sourceVal = (sourceRecord[colKey] instanceof Date) ? sourceRecord[colKey].valueOf() : sourceRecord[colKey];
                      // if this is a cell from a column for updating, and if its value doesn't match the value in the source data set for this row, col, 
                      // we assign the new value to this cell and log the change
-                     if (cell != sourceRecord[colKey]) { 
+                                     
+                     if (targetVal != sourceVal) { 
                         log.updateLog({timestamp: new Date(), 
                                       column_name: colKey, 
                                       table: target, 
